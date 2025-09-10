@@ -1,0 +1,9 @@
+@import "tailwindcss";
+
+/* This file can be minimal since we're using Tailwind */
+/* Just ensure basic resets if needed */
+
+body {
+  margin: 0;
+  padding: 0;
+}
