@@ -385,7 +385,6 @@
 // export default SharingHistoryModal;
 
 //============================================
-
 import React, { useState, useEffect } from "react";
 import { ArrowLeft, X } from "lucide-react";
 import { userAPI } from "../api/api";
@@ -419,40 +418,42 @@ const SkeletonHistoryRow = () => {
 // Skeleton Table for Modal
 const SkeletonHistoryTable = () => {
   return (
-    <div className="overflow-hidden rounded-lg border border-gray-200">
-      <div className="overflow-y-auto max-h-96">
-        <table className="min-w-full divide-y divide-gray-200">
-          {/* Table Header */}
-          <thead className="bg-gray-50 sticky top-0">
-            <tr>
-              <th className="px-4 py-3 text-left text-xs font-medium text-gray-700 uppercase tracking-wider">
-                Contact Name
-              </th>
-              <th className="px-4 py-3 text-left text-xs font-medium text-gray-700 uppercase tracking-wider">
-                Contact Address
-              </th>
-              <th className="px-4 py-3 text-left text-xs font-medium text-gray-700 uppercase tracking-wider">
-                Type
-              </th>
-              <th className="px-4 py-3 text-left text-xs font-medium text-gray-700 uppercase tracking-wider">
-                Subject
-              </th>
-              <th className="px-4 py-3 text-left text-xs font-medium text-gray-700 uppercase tracking-wider">
-                Date
-              </th>
-              <th className="px-4 py-3 text-left text-xs font-medium text-gray-700 uppercase tracking-wider">
-                Status
-              </th>
-            </tr>
-          </thead>
+    <div className="overflow-x-auto rounded-lg border border-gray-200">
+      <div className="min-w-[800px]">
+        <div className="overflow-y-auto max-h-96">
+          <table className="w-full divide-y divide-gray-200">
+            {/* Table Header */}
+            <thead className="bg-gray-50 sticky top-0">
+              <tr>
+                <th className="px-4 py-3 text-left text-xs font-medium text-gray-700 uppercase tracking-wider">
+                  Contact Name
+                </th>
+                <th className="px-4 py-3 text-left text-xs font-medium text-gray-700 uppercase tracking-wider">
+                  Contact Address
+                </th>
+                <th className="px-4 py-3 text-left text-xs font-medium text-gray-700 uppercase tracking-wider">
+                  Type
+                </th>
+                <th className="px-4 py-3 text-left text-xs font-medium text-gray-700 uppercase tracking-wider">
+                  Subject
+                </th>
+                <th className="px-4 py-3 text-left text-xs font-medium text-gray-700 uppercase tracking-wider">
+                  Date
+                </th>
+                <th className="px-4 py-3 text-left text-xs font-medium text-gray-700 uppercase tracking-wider">
+                  Status
+                </th>
+              </tr>
+            </thead>
 
-          {/* Skeleton Table Body */}
-          <tbody className="bg-white divide-y divide-gray-200">
-            {Array.from({ length: 6 }).map((_, index) => (
-              <SkeletonHistoryRow key={index} />
-            ))}
-          </tbody>
-        </table>
+            {/* Skeleton Table Body */}
+            <tbody className="bg-white divide-y divide-gray-200">
+              {Array.from({ length: 6 }).map((_, index) => (
+                <SkeletonHistoryRow key={index} />
+              ))}
+            </tbody>
+          </table>
+        </div>
       </div>
     </div>
   );
@@ -521,9 +522,9 @@ const SharingHistoryModal = ({ isOpen, onClose, user }) => {
   return (
     <div className="fixed inset-0 bg-black/60 backdrop-blur-sm flex items-center justify-center z-50 p-4">
       <div className="bg-white rounded-xl shadow-2xl w-full max-w-6xl max-h-[90vh] overflow-hidden animate-in fade-in-0 zoom-in-95 duration-300">
-        {/* Modal Header */}
-        <div className="flex items-center justify-between p-6 border-b border-gray-200 bg-white">
-          <div className="flex items-center gap-4">
+        {/* Modal Header - Made responsive */}
+        <div className="flex flex-col sm:flex-row items-start sm:items-center justify-between p-4 sm:p-6 border-b border-gray-200 bg-white gap-4">
+          <div className="flex items-center gap-4 w-full sm:w-auto">
             <button
               onClick={onClose}
               className="flex items-center gap-2 cursor-pointer text-blue-500 hover:text-blue-600 transition-colors"
@@ -531,21 +532,21 @@ const SharingHistoryModal = ({ isOpen, onClose, user }) => {
               <ArrowLeft className="w-4 h-4" />
               <span className="text-sm">Go back</span>
             </button>
-            <h2 className="text-2xl font-bold text-gray-900">
+            <h2 className="text-xl sm:text-2xl font-bold text-gray-900 truncate">
               Sharing History - {user?.userName}
             </h2>
           </div>
 
           <button
             onClick={onClose}
-            className="text-gray-400 cursor-pointer hover:text-gray-600 hover:bg-gray-100 p-2 rounded-full transition-all duration-200"
+            className="text-gray-400 cursor-pointer hover:text-gray-600 hover:bg-gray-100 p-2 rounded-full transition-all duration-200 self-end sm:self-auto absolute top-4 right-4 sm:static"
           >
             <X className="w-5 h-5" />
           </button>
         </div>
 
         {/* Modal Content */}
-        <div className="p-6 overflow-y-auto max-h-[calc(90vh-120px)]">
+        <div className="p-4 sm:p-6 overflow-y-auto max-h-[calc(90vh-120px)]">
           {error ? (
             <div className="text-center py-8 text-red-500">Error: {error}</div>
           ) : loading && page === 1 ? (
@@ -553,89 +554,91 @@ const SharingHistoryModal = ({ isOpen, onClose, user }) => {
           ) : (
             <>
               {/* History Table */}
-              <div className="overflow-hidden rounded-lg border border-gray-200">
-                <div className="overflow-y-auto max-h-96">
-                  <table className="min-w-full divide-y divide-gray-200">
-                    {/* Table Header */}
-                    <thead className="bg-gray-50 sticky top-0">
-                      <tr>
-                        <th className="px-4 py-3 text-left text-xs font-medium text-gray-700 uppercase tracking-wider">
-                          Contact Name
-                        </th>
-                        <th className="px-4 py-3 text-left text-xs font-medium text-gray-700 uppercase tracking-wider">
-                          Contact Address
-                        </th>
-                        <th className="px-4 py-3 text-left text-xs font-medium text-gray-700 uppercase tracking-wider">
-                          Type
-                        </th>
-                        <th className="px-4 py-3 text-left text-xs font-medium text-gray-700 uppercase tracking-wider">
-                          Subject
-                        </th>
-                        <th className="px-4 py-3 text-left text-xs font-medium text-gray-700 uppercase tracking-wider">
-                          Date
-                        </th>
-                        <th className="px-4 py-3 text-left text-xs font-medium text-gray-700 uppercase tracking-wider">
-                          Status
-                        </th>
-                      </tr>
-                    </thead>
-
-                    {/* Table Body */}
-                    <tbody className="bg-white divide-y divide-gray-200">
-                      {history.map((item, index) => (
-                        <tr
-                          key={index}
-                          className="hover:bg-gray-50 transition-colors"
-                        >
-                          <td className="px-4 py-3 whitespace-nowrap">
-                            <div className="text-sm text-gray-900">
-                              {item.contactName}
-                            </div>
-                          </td>
-                          <td className="px-4 py-3 whitespace-nowrap">
-                            <div className="text-sm text-gray-900">
-                              {item.contactAddress}
-                            </div>
-                          </td>
-                          <td className="px-4 py-3 whitespace-nowrap">
-                            <div className="text-sm text-gray-900">
-                              {item.type}
-                            </div>
-                          </td>
-                          <td className="px-4 py-3 whitespace-nowrap">
-                            <div className="text-sm text-gray-900">
-                              {item.subject}
-                            </div>
-                          </td>
-                          <td className="px-4 py-3 whitespace-nowrap">
-                            <div className="text-sm text-gray-900">
-                              {formatDate(item.date)}
-                            </div>
-                          </td>
-                          <td className="px-4 py-3 whitespace-nowrap">
-                            <span
-                              className={`inline-flex px-2 py-1 text-xs font-semibold rounded-full ${
-                                item.status === "sent"
-                                  ? "bg-green-100 text-green-800"
-                                  : "bg-red-100 text-red-800"
-                              }`}
-                            >
-                              {item.status.toUpperCase()}
-                            </span>
-                          </td>
+              <div className="overflow-x-auto rounded-lg border border-gray-200">
+                <div className="min-w-[800px]">
+                  <div className="overflow-y-auto max-h-96">
+                    <table className="w-full divide-y divide-gray-200">
+                      {/* Table Header */}
+                      <thead className="bg-gray-50 sticky top-0">
+                        <tr>
+                          <th className="px-4 py-3 text-left text-xs font-medium text-gray-700 uppercase tracking-wider">
+                            Contact Name
+                          </th>
+                          <th className="px-4 py-3 text-left text-xs font-medium text-gray-700 uppercase tracking-wider">
+                            Contact Address
+                          </th>
+                          <th className="px-4 py-3 text-left text-xs font-medium text-gray-700 uppercase tracking-wider">
+                            Type
+                          </th>
+                          <th className="px-4 py-3 text-left text-xs font-medium text-gray-700 uppercase tracking-wider">
+                            Subject
+                          </th>
+                          <th className="px-4 py-3 text-left text-xs font-medium text-gray-700 uppercase tracking-wider">
+                            Date
+                          </th>
+                          <th className="px-4 py-3 text-left text-xs font-medium text-gray-700 uppercase tracking-wider">
+                            Status
+                          </th>
                         </tr>
-                      ))}
+                      </thead>
 
-                      {/* Show skeleton rows when loading more pages */}
-                      {loading && page > 1 && (
-                        <>
-                          {Array.from({ length: 3 }).map((_, index) => (
-                            <SkeletonHistoryRow key={`loading-${index}`} />
-                          ))}
-                        </>
-                      )}
-                    </tbody>
-                  </table>
+                      {/* Table Body */}
+                      <tbody className="bg-white divide-y divide-gray-200">
+                        {history.map((item, index) => (
+                          <tr
+                            key={index}
+                            className="hover:bg-gray-50 transition-colors"
+                          >
+                            <td className="px-4 py-3 whitespace-nowrap">
+                              <div className="text-sm text-gray-900">
+                                {item.contactName}
+                              </div>
+                            </td>
+                            <td className="px-4 py-3 whitespace-nowrap">
+                              <div className="text-sm text-gray-900">
+                                {item.contactAddress}
+                              </div>
+                            </td>
+                            <td className="px-4 py-3 whitespace-nowrap">
+                              <div className="text-sm text-gray-900">
+                                {item.type}
+                              </div>
+                            </td>
+                            <td className="px-4 py-3 whitespace-nowrap">
+                              <div className="text-sm text-gray-900">
+                                {item.subject}
+                              </div>
+                            </td>
+                            <td className="px-4 py-3 whitespace-nowrap">
+                              <div className="text-sm text-gray-900">
+                                {formatDate(item.date)}
+                              </div>
+                            </td>
+                            <td className="px-4 py-3 whitespace-nowrap">
+                              <span
+                                className={`inline-flex px-2 py-1 text-xs font-semibold rounded-full ${
+                                  item.status === "sent"
+                                    ? "bg-green-100 text-green-800"
+                                    : "bg-red-100 text-red-800"
+                                }`}
+                              >
+                                {item.status.toUpperCase()}
+                              </span>
+                            </td>
+                          </tr>
+                        ))}
+
+                        {/* Show skeleton rows when loading more pages */}
+                        {loading && page > 1 && (
+                          <>
+                            {Array.from({ length: 3 }).map((_, index) => (
+                              <SkeletonHistoryRow key={`loading-${index}`} />
+                            ))}
+                          </>
+                        )}
+                      </tbody>
+                    </table>
+                  </div>
                 </div>
               </div>
 
@@ -656,7 +659,7 @@ const SharingHistoryModal = ({ isOpen, onClose, user }) => {
                   <button
                     onClick={loadMore}
                     disabled={loading}
-                    className="bg-white hover:bg-gray-50 text-gray-700 font-medium py-2 px-6 rounded-lg border border-gray-300 transition-colors duration-200 disabled:opacity-50 shadow-sm"
+                    className="bg-white hover:bg-gray-50 text-gray-700 font-medium py-2 px-6 rounded-lg border border-gray-300 transition-colors duration-200 disabled:opacity-50 shadow-sm text-sm"
                   >
                     Load More
                   </button>
@@ -666,7 +669,7 @@ const SharingHistoryModal = ({ isOpen, onClose, user }) => {
               {/* Loading indicator for pagination */}
               {loading && page > 1 && (
                 <div className="flex justify-center mt-6">
-                  <div className="bg-gray-100 text-gray-600 font-medium py-2 px-6 rounded-lg border border-gray-300">
+                  <div className="bg-gray-100 text-gray-600 font-medium py-2 px-6 rounded-lg border border-gray-300 text-sm">
                     Loading more history...
                   </div>
                 </div>
