@@ -1,8 +1,8 @@
 // src/router.jsx
 import { createBrowserRouter } from "react-router-dom";
 import App from "./App";
-import SubAccountsStats from "./components/SubAccountsStats";
-import SubAccountDetails from "./components/SubAccountDetails";
+import SubAccountsStats from "./pages/SubAccountsStats";
+import SubAccountDetails from "./pages/SubAccountDetails";
 
 const router = createBrowserRouter([
   {

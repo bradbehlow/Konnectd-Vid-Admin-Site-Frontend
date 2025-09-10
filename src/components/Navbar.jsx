@@ -1,5 +1,7 @@
 import React from "react";
-import { Bell, Settings, User } from "lucide-react";
+import { Bell, Settings } from "lucide-react";
+import logo from "../assets/Konnectd_logo.png";
+import profile from "../assets/admin_profile.png"; // Example profile image
 
 const Navbar = () => {
   return (
@@ -8,9 +10,11 @@ const Navbar = () => {
         {/* Left side - Logo/Brand */}
         <div className="flex items-center space-x-4">
           <div className="flex items-center space-x-3">
-            <div className="w-8 h-8 bg-blue-600 rounded-lg flex items-center justify-center">
-              <span className="text-white font-bold text-sm">A</span>
-            </div>
+            <img
+              src={logo}
+              alt="Konnectd Logo"
+              className="w-8 h-8 object-contain"
+            />
             <span className="text-xl font-semibold text-gray-900">Admin</span>
           </div>
         </div>
@@ -30,11 +34,15 @@ const Navbar = () => {
 
           {/* Profile */}
           <div className="flex items-center space-x-3">
-            <div className="w-8 h-8 bg-gradient-to-br from-blue-500 to-purple-600 rounded-full flex items-center justify-center">
-              <User className="w-4 h-4 text-white" />
+            <div className="w-8 h-8 rounded-full overflow-hidden">
+              <img
+                src={profile}
+                alt="Admin Profile"
+                className="w-full h-full object-cover"
+              />
             </div>
             <div className="hidden md:block">
-              <p className="text-sm font-medium text-gray-900">Admin User</p>
+              <p className="text-sm font-medium text-gray-900">Brad Behlow</p>
               <p className="text-xs text-gray-500">Super Admin</p>
             </div>
           </div>

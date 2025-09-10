@@ -331,7 +331,7 @@
 import React, { useState, useEffect } from "react";
 import { Search, ArrowLeft, Share } from "lucide-react";
 import { useNavigate, useParams } from "react-router-dom";
-import SharingHistoryModal from "./SharingHistoryModal";
+import SharingHistoryModal from "../components/SharingHistoryModal";
 import { subAccountAPI } from "../api/api";
 
 // Skeleton Table Row Component
